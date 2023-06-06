@@ -1,0 +1,148 @@
+
+Prompt:
+Time is ticking and it's essential that we address the causes of global warming. Fast. And as they say: you can't manage what you don't measure. For this challenge, we need you to help a user calculate their carbon footprint. Build a web app that asks a user for their habits (food, travel, work, etc.), calculates their carbon footprint and then suggests how the user could reduce it.
+
+*************************
+
+if we ask about more than just daily habits, make Daily Habits its own section
+
+how often do you eat meat?
+every day
+1~2 times per week
+~1-2 times per month
+occasionally or never
+
+(depending on the previous answer, skip this question)
+what kind of meat do you eat most often?
+- beef
+- veal
+- chicken
+- pork
+- fish
+- other
+
+what kind of eat do you meat most often?
+
+Roughly how far do you travel each day (e.g. while going to and from work)?
+- Less than x1 mi (should we include km too?)
+- x1-x2 mi
+- x2-x3 mi
+- x3-x4 mi
+- More than x4 mi
+
+What mode of transportation do you normally use?
+- Car
+- Public transport (e.g. bus/subway/train)
+- Bike
+- Walking
+
+(If they drive a car)
+What kind of car do you drive?
+- Gas
+- Electric
+- Hybrid
+
+Do you carpool?
+- Yes
+- No
+
+(What else? Something about water...?)
+
+Maybe ask about waste (since trash is often burned, right?)
+
+Do you separate kitchen trash from other trhahshdhhdhdhdnxksmrkofodoeodkndnsnxn,nzmamdmdmxmm nskekkcks in ovisio iowocoxkxkxmxmxmd
+
+
+
+
+should we allow individual questions to be skipped?
+
+does it make sense to ask about food if you're not the one producing it?
+
+
+See this:
+https://www3.epa.gov/carbon-footprint-calculator/
+
+*****
+
+should we ask for and provide specific figures or only give a rough estimate?
+
+could maybe use average values to fill in blanks, if absolutely necessary
+
+***
+
+
+
+***
+show questions/form
+get input
+calculate footprint
+give suggestions; order based on which suggestions will give the largest footprint reduction
+
+plastic differentiation?
+
+how do we motivate the user to input accurate information? Or should we guess???
+
+))))
+
+do you travel to/from work or school five days per week?
+
+Whatdhr;tbebejfu7jjjwjjj+jjjnnnnj
+
+do you support companies like Shell?
+
+Do you regularly travel to a workplace and/or school?
+
+Maybe have a "place adding" widget?
+
+Integrate with geoapify and that might not be a bad idea...!
+
+We could also use the distance to estimate whether it would be feasible for a user to walk/bike instead of driving
+
+
+If there's a place to which you regularly travel (such as a workplace, or the grocery store), please enter it here:
+Add Place +
+
+Home location: (note: program should store user's location for reuse)
+Place location:
+---
+OR
+---
+Distance:
+
+How many days per week do you travel to and from this place?
+1 2 3 4 5 6 7
+
+What mode of transportation do you most often use to get to/from this place?
+Car (gas-powered)
+Car (electric)
+Car (hybrid)
+Public transport (e.g. bus, train, or subway)
+Bike
+Walking
+
+Maybe call the widgets "habits"
+
+Let the user add one or more habits from different categories
+
+Habit types could include Meat, Dairy, Travel, Electricity, Waste, and Work (?)
+
+**
+
+could include a clarifying message at the beginning like:
+
+this questionnaire is only about your habits, that is, things that you do regularly; don't worry about trying to remember whether how long you drove on [special occasion?], for example.
+
+You don't have to add a habit for every category, but for each category you can add as many as you want. Providing more information will allow for higher accuracy.
+
+Distance widget should maybe include disclaimer like:
+if you already know the distance between your home and the place of interest, you can enter it here. Otherwise, you can enter the locations and we'll calculate the distance for you. We will not share your location data with anyone [check that geoApify won't do it either...]
+
+should we include a login feature so that users can save their data and view their progress over time? 
+
+If so, make it optional
+
+note: based on the EPA calculator website, transportation accounts for dramatically more of the average American's carbon footprint than waste or home energy. So, that's the item for which we need the best measurement.
+
+
+
