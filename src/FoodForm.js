@@ -83,7 +83,7 @@ function FoodForm() {
             <p>
             Some foods require more greenhouse gas emissions to produce than others. If you eat one of the listed foods, please indicate how many servings of it you eat per week.
             </p>
-            {inputData.map((data, index) => (
+            {inputData && inputData.map((data, index) => (
             <div>
                 <b>{FOOD_DATA[index].name}:</b>
                 <input type="number" min={0}
