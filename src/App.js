@@ -10,20 +10,28 @@ const CO2_PER_MILE = 400; //g
 // using placeholder numbers
 
 /*
-Data for different kinds of food, and how much CO2-eq (in grams) is emitted from producing one serving of that food.
+Data for different kinds of food, and how much CO2-eq (in kg) is emitted from producing one serving of that food.
 */
 const FOOD_DATA = [
   {
     name: "beef",
-    co2PerServing: 330
+    co2PerServing: 50
+  },
+  {
+    name: "lamb",
+    co2PerServing: 20
+  },
+  {
+    name: "pork",
+    co2PerServing: 7.6
   },
   {
     name: "chicken",
-    co2PerServing: 52
+    co2PerServing: 5.7
   },
   {
     name: "fish",
-    co2PerServing: 40
+    co2PerServing: 6
   }
 ]
 
