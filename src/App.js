@@ -57,6 +57,8 @@ function App() {
   const [showResults, setShowResults] = useState(false);
   const totalFootprint = useRef(0);
 
+  const [suggestions, setSuggestions] = useState([]);
+
   function calculateFootPrint() {
     let carTravelFootprint = 0;
     travelData.forEach((data) => {
@@ -69,6 +71,13 @@ function App() {
     });
 
     totalFootprint.current = (carTravelFootprint + foodFoodprint);
+
+    let newSuggestions = [];
+    if((foodData[0] > 0) || (foodData[1] > 0))
+      newSuggestions.push("Eat less beef and lamb");
+    if(carTravelFootprint > 10*CO2_PER_MILE)
+      newSuggestions.push("Consider alternate means of transport")
+
     setShowResults(true);
   }
 
@@ -160,6 +169,14 @@ function App() {
           <>
             <h2>Your total carbon footprint:</h2>
             <p>{totalFootprint.current}</p>
+            <h3>Suggestions to reduce your carbon footprint:</h3>
+            {
+              suggestions.map((suggestion, index) => (
+                <p>
+                  {index+1}. {suggestion}
+                </p>
+              ))
+            }
             <button onClick={e => setShowResults(false)}>
               Back to form
             </button>
