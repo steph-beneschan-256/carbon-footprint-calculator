@@ -1,0 +1,160 @@
+{
+    "results": [
+      {
+        "datasource": {
+          "sourcename": "openstreetmap",
+          "attribution": "© OpenStreetMap contributors",
+          "license": "Open Database License",
+          "url": "https://www.openstreetmap.org/copyright"
+        },
+        "name": "Trader Joe's",
+        "country": "United States",
+        "country_code": "us",
+        "state": "California",
+        "county": "Orange County",
+        "city": "Irvine",
+        "postcode": "92604",
+        "suburb": "Walnut",
+        "street": "Culver Drive",
+        "housenumber": "14443",
+        "lon": -117.78842589754542,
+        "lat": 33.706157000000005,
+        "state_code": "CA",
+        "formatted": "Trader Joe's, 14443 Culver Drive, Irvine, CA 92604, United States of America",
+        "address_line1": "Trader Joe's",
+        "address_line2": "14443 Culver Drive, Irvine, CA 92604, United States of America",
+        "category": "commercial.supermarket",
+        "timezone": {
+          "name": "America/Los_Angeles",
+          "offset_STD": "-08:00",
+          "offset_STD_seconds": -28800,
+          "offset_DST": "-07:00",
+          "offset_DST_seconds": -25200,
+          "abbreviation_STD": "PST",
+          "abbreviation_DST": "PDT"
+        },
+        "result_type": "amenity",
+        "rank": {
+          "importance": 0.40001,
+          "popularity": 4.662371491392007,
+          "confidence": 1,
+          "confidence_city_level": 1,
+          "match_type": "full_match"
+        },
+        "place_id": "51bb51e59175725dc059b66b425a63da4040f00102f901b7808b1600000000c0020192030c547261646572204a6f652773",
+        "bbox": {
+          "lon1": -117.78872,
+          "lat1": 33.7058922,
+          "lon2": -117.7881657,
+          "lat2": 33.7064204
+        }
+      },
+      {
+        "datasource": {
+          "sourcename": "openstreetmap",
+          "attribution": "© OpenStreetMap contributors",
+          "license": "Open Database License",
+          "url": "https://www.openstreetmap.org/copyright"
+        },
+        "name": "Trader Joe's",
+        "country": "United States",
+        "country_code": "us",
+        "state": "California",
+        "county": "Orange County",
+        "city": "Irvine",
+        "postcode": "92612",
+        "suburb": "University Town Center",
+        "street": "Campus Drive",
+        "housenumber": "4225",
+        "lon": -117.8375537,
+        "lat": 33.6503583,
+        "state_code": "CA",
+        "formatted": "Trader Joe's, 4225 Campus Drive, Irvine, CA 92612, United States of America",
+        "address_line1": "Trader Joe's",
+        "address_line2": "4225 Campus Drive, Irvine, CA 92612, United States of America",
+        "category": "commercial.supermarket",
+        "timezone": {
+          "name": "America/Los_Angeles",
+          "offset_STD": "-08:00",
+          "offset_STD_seconds": -28800,
+          "offset_DST": "-07:00",
+          "offset_DST_seconds": -25200,
+          "abbreviation_STD": "PST",
+          "abbreviation_DST": "PDT"
+        },
+        "result_type": "amenity",
+        "rank": {
+          "importance": 0.40001,
+          "popularity": 6.08997271146565,
+          "confidence": 1,
+          "confidence_city_level": 1,
+          "match_type": "full_match"
+        },
+        "place_id": "513489d57a9a755dc0595197d6f03ed34040f00103f90176a7ba1500000000c0020192030c547261646572204a6f652773",
+        "bbox": {
+          "lon1": -117.8376037,
+          "lat1": 33.6503083,
+          "lon2": -117.8375037,
+          "lat2": 33.6504083
+        }
+      },
+      {
+        "datasource": {
+          "sourcename": "openstreetmap",
+          "attribution": "© OpenStreetMap contributors",
+          "license": "Open Database License",
+          "url": "https://www.openstreetmap.org/copyright"
+        },
+        "name": "Trader Joe's",
+        "country": "United States",
+        "country_code": "us",
+        "state": "California",
+        "county": "Orange County",
+        "city": "Irvine",
+        "postcode": "92620",
+        "district": "Woodbury Lane",
+        "suburb": "Woodbury",
+        "street": "Irvine Boulevard",
+        "housenumber": "6222",
+        "lon": -117.74330200983684,
+        "lat": 33.698505850000004,
+        "state_code": "CA",
+        "formatted": "Trader Joe's, 6222 Irvine Boulevard, Irvine, CA 92620, United States of America",
+        "address_line1": "Trader Joe's",
+        "address_line2": "6222 Irvine Boulevard, Irvine, CA 92620, United States of America",
+        "category": "commercial.supermarket",
+        "timezone": {
+          "name": "America/Los_Angeles",
+          "offset_STD": "-08:00",
+          "offset_STD_seconds": -28800,
+          "offset_DST": "-07:00",
+          "offset_DST_seconds": -25200,
+          "abbreviation_STD": "PST",
+          "abbreviation_DST": "PDT"
+        },
+        "result_type": "amenity",
+        "rank": {
+          "importance": 0.40001,
+          "popularity": 4.277448013048837,
+          "confidence": 1,
+          "confidence_city_level": 1,
+          "match_type": "full_match"
+        },
+        "place_id": "5138d39742926f5dc05948e8c2a368d94040f00102f90199b70e0600000000c0020192030c547261646572204a6f652773",
+        "bbox": {
+          "lon1": -117.7434719,
+          "lat1": 33.6982272,
+          "lon2": -117.7429998,
+          "lat2": 33.6986833
+        }
+      }
+    ],
+    "query": {
+      "text": "trader joe's irvine",
+      "parsed": {
+        "house": "trader joe's",
+        "city": "irvine",
+        "expected_type": "amenity"
+      }
+    }
+  }

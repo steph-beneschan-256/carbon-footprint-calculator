@@ -1,0 +1,14 @@
+.location-search-results-container {
+    overflow: scroll;
+    text-align: left;
+  }
+  
+  .location-search-results-container button {
+    width: 100%;
+    text-align: left;
+    background-color: transparent;
+    border: none
+  }
+  .location-search-results-container button:hover {
+    background-color: #61dafb;
+  }

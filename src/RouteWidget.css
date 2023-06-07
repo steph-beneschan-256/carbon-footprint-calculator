@@ -1,0 +1,21 @@
+.route-widget {
+    background-color: lightgrey;
+    border-radius: 10px;
+    padding: 1%;
+    margin: 1%;
+    width: 96%;
+}
+
+.location-label-a {
+    margin-left: 5%;
+    margin-right: 5%;
+    height: auto;
+    text-align: right;
+}
+
+.location-label-b {
+    width: 79%;
+    height: auto;
+    text-align: center;
+    overflow: hidden;
+}

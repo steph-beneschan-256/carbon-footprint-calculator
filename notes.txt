@@ -146,3 +146,29 @@ note: based on the EPA calculator website, transportation accounts for dramatica
 
 
 
+***************
+
+Average emissions from different sources
+
+According to the EPA's website, "the average passenger vehicle emits about 400 grams of CO2 per mile:" https://www.epa.gov/greenvehicles/tailpipe-greenhouse-gas-emissions-typical-passenger-vehicle#driving
+
+
+co2-ceq (?) from one serving of different proteins, according to the Vox video:
+
+beef: 330g
+chicken: 52g
+fish: 40g
+vegetables: 14g
+lentils: 2g
+
+rice?: 14g
+cheese?: 74g
+apples?: 6.4g
+eggs?: 24g
+
+can't find the uc davis data in a written format...
+
+
+
+
+https://www.researchgate.net/publication/325532198_Reducing_food%27s_environmental_impacts_through_producers_and_consumers

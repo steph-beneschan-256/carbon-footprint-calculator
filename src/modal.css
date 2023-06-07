@@ -1,0 +1,52 @@
+@keyframes backgroundFadeIn {
+    from {opacity: 0};
+    to {opacity: 1};
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        top: -100%;
+    }
+    to {
+        opacity: 1;
+        top: 0;
+    }
+
+}
+
+/*Fade the background with a transparent black color*/
+.modal-container { 
+    position: fixed;
+    width: 100%;
+    min-height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: #00000088;
+    transition: background-color 0.25s;
+
+    animation-name: backgroundFadeIn;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+.modal-inner {
+    position: fixed;
+    width: 92%;
+    margin: 2%;
+    padding: 2%;
+
+    background-color: #ffffff;
+    border-radius: 2vw;
+
+    animation-name: slideIn;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+
+}
+
+.modal-header {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #00000088;
+}
