@@ -37,4 +37,8 @@
   }
 }
 
-
+.footprint-chart-container {
+  width: calc(min(90vw, 90vh, 600px));
+  margin-left: calc((100% - min(90vw, 90vh, 600px))/2);
+  margin-right: calc((100% - min(90vw, 90vh, 600px))/2);
+}

@@ -41,11 +41,11 @@ class FormDataManager {
     */
     async calculateTotalFootprint() {
         return Promise.all(Object.keys(this.data).map((key) => this.footprintDataGetters[key](this.data[key]))).then((allData) => {
-            let footprintData = {};
+            let footprintData = {"breakdown": {}};
             let totalFootprint = 0;
 
             allData.forEach((data) => {
-                footprintData[data.key] = data;
+                footprintData.breakdown[data.key] = data;
                 totalFootprint += data.footprint;
             })
 

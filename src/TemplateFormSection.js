@@ -59,7 +59,7 @@ function TemplateFormSection() {
             <p>
             (Blah blah blah)
             </p>
-            {inputData.map((data, index) => (
+            {inputData && inputData.map((data, index) => (
             <div>
                 {/*
                     Input components/elements go here
