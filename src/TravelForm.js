@@ -19,10 +19,10 @@ Get the user's total footprint for this type of activity,
 and suggestions for reducing their footprint
 */
 async function getFootprintData(travelData) {
-    let travelFootprint = 0;
-    travelData.forEach((data) => {
+    let travelFootprint = travelData.baseDistance;
+    travelData.routes.forEach((route) => {
         //TODO: query the api that shivangi found
-        travelFootprint += CO2_PER_MILE * parseFloat(data.distance);
+        travelFootprint += CO2_PER_MILE * parseFloat(route.distance) * route.daysPerWeek / 7;
     });
     return {
         key: ACTIVITY_TYPE_KEY,
@@ -49,37 +49,47 @@ function TravelForm() {
     useEffect(() => {
         if(!inputData) {
             let savedData = formDataManager.loadData(ACTIVITY_TYPE_KEY);
-            setInputData(savedData ? savedData : [
-                {
-                    distance: 0,
-                    origin: null,
-                    destination: null
-                } // Default value
-            ]);
+            setInputData(savedData ? savedData : {
+              baseDistance: 0,
+              routes: [
+                // {
+                //     distance: 0,
+                //     origin: null,
+                //     destination: null,
+                //     daysPerWeek: 1
+                // } // Default value
+            ]});
         }
     }, [inputData]);
 
-  function addRouteWidget() {
-    if(inputData.length < 5) {
-      const newIndex = inputData.length;
-      setInputData([
-        ...inputData,
-        {
-          key: newIndex,
-          distance: 0,
-          origin: null,
-          destination: null
-        }
-      ])
+  function addRoute() {
+    if(inputData.routes.length < 5) {
+      const newIndex = inputData.routes.length;
+      setInputData({
+        baseDistance: (inputData.baseDistance),
+        routes: [
+          ...inputData.routes,
+          {
+            key: newIndex,
+            distance: 0,
+            origin: null,
+            destination: null,
+            daysPerWeek: 1
+          }
+        ]
+      });
     }
   }
 
-  function deleteRouteWidget(index) {
-    if(inputData.length > 1) {
-      setInputData([
-        ...inputData.splice(0, index),
-        ...inputData.splice(index)
-      ])
+  function removeRoute(index) {
+    if(inputData.routes.length > 1) {
+      setInputData({
+        baseDistance: (inputData.baseDistance),
+        routes: [
+          ...inputData.routes.slice(0, index),
+          ...inputData.routes.slice(index)
+        ]
+      });
     }
   }
 
@@ -97,28 +107,60 @@ function TravelForm() {
             If there's a route on which you regularly on which you regularly drive (using a gas-powered vehicle), such as from home to the workplace or from the workplace to the grocery store, please enter the distance that you drive on that route.
         </p>
 
-        {inputData && (inputData.map((_, index) => (
-            <RouteWidget routeNumber={index+1}
-            defaultDistance={inputData[index].distance}
-            defaultOrigin={inputData[index].origin}
-            defaultDestination={inputData[index].destination}
-
-            onDataUpdated={(newData) => {
-            const newTravelData = (inputData.map((data, dataIndex) => {
-                return (index !== dataIndex) ? data : newData;
-            }));
-            setInputData(newTravelData);
-            console.log(newTravelData);
-            // Use formDataManager.saveData to save the user's input data
-            formDataManager.saveData(ACTIVITY_TYPE_KEY, newTravelData);
+        {
+          inputData && <div>
+            <input type="number" min="0" value={inputData.baseDistance}
+            onChange={(e) => {
+              const newTravelData = {
+                ...inputData,
+                baseDistance: e.target.value
+              };
+              setInputData(newTravelData);
+              formDataManager.saveData(ACTIVITY_TYPE_KEY, newTravelData);
             }}
             />
-        )))}
 
-        <button onClick={addRouteWidget}>
-            + Add Route
-        </button>
+            {/* 
+
+            Shouldn't spend too much time on the route input thing, but it maybe should go something like this:
+            1. click add route button
+            2. modal dialog appears
+            3. route appears with its distance, in the list, and can be removed but not otherwise changed
+            
+            
+            */}
+
+            {inputData.routes.map((_, index) => (
+                <RouteWidget routeNumber={index+1}
+                defaultDistance={inputData.routes[index].distance}
+                defaultOrigin={inputData.routes[index].origin}
+                defaultDestination={inputData.routes[index].destination}
+
+                onDataUpdated={(newData) => {
+                  const newRoutes = (inputData.routes.map((data, dataIndex) => {
+                      return (index !== dataIndex) ? data : newData;
+                  }));
+                  const newTravelData = {
+                    ...inputData,
+                    routes: newRoutes
+                  };
+                  setInputData(newTravelData);
+                  // Use formDataManager.saveData to save the user's input data
+                  formDataManager.saveData(ACTIVITY_TYPE_KEY, newTravelData);
+                  }}
+                />
+            ))}
+
+            <button onClick={addRoute}>
+                + Add Route
+            </button>
+            
+          </div>
+        }
+
       </div>
+
+      
         
     </div>
   );

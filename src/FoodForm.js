@@ -38,13 +38,24 @@ Get the user's total footprint for this type of activity,
 and suggestions for reducing their footprint
 */
 async function getFootprintData(userData) {
-    let foodFootprint = 0;
-    let suggestions = [];
+  const servingsPerWeek = parseInt(userData.totalServingsPerWeek);
+  const foodFootprint = parseInt(userData.totalServingsPerWeek) / 7 * FOOD_DATA[userData.meatMostEaten].co2PerServing;
+  let suggestions = [];
+  if(servingsPerWeek > 0) {
+    switch(FOOD_DATA[userData.meatMostEaten].name) {
+      case "beef":
+      case "lamb":
+        suggestions.push("Producing beef and lamb involves much more greenhouse gas emissions than producing other kinds of meat. Consider occasionally swapping beef or lamb for a different type of meat; switching to pork, for instance, carries a carbon footprint 80% smaller than that of beef.");
+        break;
+      default:
+        break;
+    }
 
-    FOOD_DATA.forEach((data, index) => {
-      foodFootprint += data.co2PerServing * parseInt(userData[index]);
-    });
+    if(servingsPerWeek > 7) {
+      suggestions.push("You seem to eat meat rather often. You don't have to become a vegetarian, but consider eating a larger portion of vegetables.")
+    };
 
+  }
     //if the user only eats beef or lamb once per week, should cutting back on beef/lamb be our first suggestion here?
     //maybe check against the average amount of meat eaten per week?
     
@@ -74,7 +85,11 @@ function FoodForm() {
         if(!inputData) {
             let savedData = formDataManager.loadData(ACTIVITY_TYPE_KEY);
             setInputData(savedData ? savedData : 
-                Array(FOOD_DATA.length).fill(0) //Default value
+                {
+                  totalServingsPerWeek: 0,
+                  meatMostEaten: 0
+                }
+                //Default value
             );
         }
       }, [inputData]);
@@ -88,23 +103,45 @@ function FoodForm() {
           </div>
           <div className="form-section-inner">
             <p>
-            Some foods require more greenhouse gas emissions to produce than others. If you eat one of the listed foods, please indicate how many servings of it you eat per week.
+            Some foods require more greenhouse gas emissions to produce than others.
             </p>
-            {inputData && inputData.map((data, index) => (
-            <div>
-                <b>{FOOD_DATA[index].name}:</b>
-                <input type="number" min={0}
-                value={inputData[index]} onChange={ e => {
-                    const newFoodData = inputData.map((d,i) => {
-                    return (i !== index) ? d : e.target.value
-                    });
+            <h3>
+              Meat
+            </h3>
+            Roughly how many servings of meat do you consume each week?
+            <br/>
+            (One serving is approximately 3oz, or about the size of a deck of playing cards)
+            {inputData && <div>
+              <input type="number" min={0}
+              value={inputData.totalServingsPerWeek} onChange={ e => {
+                const newFoodData = {
+                  ...inputData,
+                  totalServingsPerWeek: e.target.value
+                };
+                setInputData(newFoodData);
+                formDataManager.saveData(ACTIVITY_TYPE_KEY, newFoodData);
+              }}/>
+            </div>}
+            {inputData && (parseInt(inputData.totalServingsPerWeek) > 0) && <div>
+              <p>
+                What type of meat do you consume most often?
+              </p>
+              {FOOD_DATA.map((data, index) => (
+                <label>
+                  <input type="radio" checked={inputData.meatMostEaten === index}
+                  value={data.name}
+                  onChange={e => {
+                    const newFoodData = {
+                      ...inputData,
+                      meatMostEaten: index
+                    };
                     setInputData(newFoodData);
-                    // Use formDataManager.saveData to save the user's input data
                     formDataManager.saveData(ACTIVITY_TYPE_KEY, newFoodData);
-                }}
-                />
-            </div>
-            ))}
+                  }}/>
+                  {data.name}
+                </label>
+              ))}
+            </div>}
         </div>
       </div>
     )

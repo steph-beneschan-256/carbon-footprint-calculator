@@ -40,10 +40,11 @@ function App() {
     categories.sort((c1, c2) => 
       footprintData.breakdown[c2] - footprintData.breakdown[c1]
     );
-    setSuggestions(
-      categories.slice(0,3).map((category) => 
-        footprintData.breakdown[category].suggestions[0]
-    ));
+    let newSuggestions = [];
+    categories.slice(0,3).forEach((category) => {
+        newSuggestions = newSuggestions.concat(footprintData.breakdown[category].suggestions);
+    });
+    setSuggestions(newSuggestions);
 
     setShowResults(true);
   }
