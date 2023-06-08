@@ -8,6 +8,7 @@ import formDataManager from './FormDataManager';
 import FoodForm from './FoodForm';
 
 import Chart from "react-apexcharts";
+import WasteForm from './WasteForm';
 
 const CO2_PER_MILE = 400; //g
 //https://www.epa.gov/greenvehicles/tailpipe-greenhouse-gas-emissions-typical-passenger-vehicle#driving
@@ -33,6 +34,17 @@ function App() {
     setChartLabels(categories);
     setChartSeries(categories.map((category) => footprintData.breakdown[category].footprint));
 
+    /*
+    Find the 3 categories for in which the user has the highest carbon footprint. Then, for each of those categories, display a suggested course of action.
+    */
+    categories.sort((c1, c2) => 
+      footprintData.breakdown[c2] - footprintData.breakdown[c1]
+    );
+    setSuggestions(
+      categories.slice(0,3).map((category) => 
+        footprintData.breakdown[category].suggestions[0]
+    ));
+
     setShowResults(true);
   }
 
@@ -52,6 +64,7 @@ function App() {
 
             <TravelForm />
             <FoodForm />
+            <WasteForm />
 
             <button onClick={calculateFootPrint}>
               Calculate total footprint!
