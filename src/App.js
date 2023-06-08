@@ -66,15 +66,15 @@ function App() {
             <FoodForm />
             <WasteForm />
 
-            <button onClick={calculateFootPrint}>
-              Calculate total footprint!
+            <button onClick={calculateFootPrint} className="primary-button">
+              Calculate total footprint
             </button>
 
           </>
         ) : (
           <>
             <h2>Your total carbon footprint:</h2>
-            <h1>{totalFootprintData.current.total} grams CO₂e</h1>
+            <h1>{totalFootprintData.current.total} grams CO₂e per day</h1>
             <p>
             CO₂e is short for CO₂e equivalent. Your footprint is equivalent to emitting about {totalFootprintData.current.total} grams of CO₂.
             {/* 
@@ -94,6 +94,7 @@ function App() {
               />
             </div>
             <h3>Suggestions to reduce your carbon footprint:</h3>
+            <div className="suggestions-container">
             {
               suggestions.map((suggestion, index) => (
                 <p>
@@ -101,6 +102,8 @@ function App() {
                 </p>
               ))
             }
+            </div>
+
             <button onClick={e => setShowResults(false)}>
               Back to form
             </button>

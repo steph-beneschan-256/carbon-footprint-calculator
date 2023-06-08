@@ -85,7 +85,11 @@ function TravelForm() {
 
   return (
     <div className="form-section">
+      <div className="form-section-header">
+        <img src="car.svg" alt="" />
         <h2>Car Travel</h2>
+      </div>
+      <div className="form-section-inner">
         <p>
             Regularly driving a car can dramatically inflate your carbon footprint.
         </p>
@@ -114,6 +118,7 @@ function TravelForm() {
         <button onClick={addRouteWidget}>
             + Add Route
         </button>
+      </div>
         
     </div>
   );

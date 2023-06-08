@@ -123,29 +123,35 @@ function WasteForm() {
     
 
     return(
-        <div>
-            <h2>Waste/Recycling</h2>
-            <p>
-                Some types of waste can be recycled or composted, while other types of waste cannot be.
-            </p>
-            <p>
-                Which of the following materials do you regularly use, and regularly dispose of without recycling or composting them?
-            </p>
-            {inputData && MATERIAL_WASTE_DATA.map((data, index) => (
-            <div>
-                {
-                    <label>   
-                        <input type="checkbox" checked={inputData[index]}
-                        onChange={e => {
-                            const newData = inputData.map((v,i) => (i !== index ? v : !inputData[index]));
-                            setInputData(newData);
-                            formDataManager.saveData(ACTIVITY_TYPE_KEY, newData);
-                        }}/>
-                        {data.name}
-                    </label>
-                }
+        <div className="form-section">
+            <div className="form-section-header">
+                <img src="waste.svg" alt="" />
+                <h2>Waste/Recycling</h2>
             </div>
-            ))}
+            <div className="form-section-inner">
+                <p>
+                    Some types of waste can be recycled or composted, while other types of waste cannot be.
+                </p>
+                <p>
+                    Which of the following materials do you regularly use, and regularly dispose of without recycling or composting them?
+                </p>
+                {inputData && MATERIAL_WASTE_DATA.map((data, index) => (
+                <div>
+                    {
+                        <label>   
+                            <input type="checkbox" checked={inputData[index]}
+                            onChange={e => {
+                                const newData = inputData.map((v,i) => (i !== index ? v : !inputData[index]));
+                                setInputData(newData);
+                                formDataManager.saveData(ACTIVITY_TYPE_KEY, newData);
+                            }}/>
+                            {data.name}
+                        </label>
+                    }
+                </div>
+                ))}
+            </div>
+
         </div>
     )
 

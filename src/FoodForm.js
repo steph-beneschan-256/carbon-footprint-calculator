@@ -44,6 +44,9 @@ async function getFootprintData(userData) {
     FOOD_DATA.forEach((data, index) => {
       foodFootprint += data.co2PerServing * parseInt(userData[index]);
     });
+
+    //if the user only eats beef or lamb once per week, should cutting back on beef/lamb be our first suggestion here?
+    //maybe check against the average amount of meat eaten per week?
     
     return {
         key: ACTIVITY_TYPE_KEY,
@@ -79,7 +82,11 @@ function FoodForm() {
 
     return(
         <div>
+          <div className="form-section-header">
+            <img src="food.svg" alt="" />
             <h2>Food</h2>
+          </div>
+          <div className="form-section-inner">
             <p>
             Some foods require more greenhouse gas emissions to produce than others. If you eat one of the listed foods, please indicate how many servings of it you eat per week.
             </p>
@@ -99,6 +106,7 @@ function FoodForm() {
             </div>
             ))}
         </div>
+      </div>
     )
 
 }

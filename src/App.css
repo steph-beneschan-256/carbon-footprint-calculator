@@ -37,8 +37,45 @@
   }
 }
 
+.primary-button {
+  width: 98%;
+  margin: 1%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  font-size: 1rem;
+  background-color: #07b1b1;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  transition: background-color 0.25s;
+}
+.primary-button:hover {
+  background-color: #37c0c0;
+  cursor: pointer;
+}
+
 .footprint-chart-container {
   width: calc(min(90vw, 90vh, 600px));
   margin-left: calc((100% - min(90vw, 90vh, 600px))/2);
   margin-right: calc((100% - min(90vw, 90vh, 600px))/2);
+}
+
+.form-section-header {
+  width: 99%;
+  font-size: 1.5rem;
+  color: #008b8b;
+  padding-left: 1%;
+  margin-top: 2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 4px solid #008b8b;
+}
+.form-section-header h2 {
+  margin: 1rem;
+  display: inline-block;
+}
+.form-section-header img {
+  width: 10%;
+  max-width: 100px;
+  display: inline-block;
 }
