@@ -1,0 +1,12 @@
+.route-widget {
+    background-color: lightgrey;
+    padding: 1%;
+    margin: 1%;
+    width: 96%;
+  }
+  
+  .route-widget input {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    width: 2rem;
+  }

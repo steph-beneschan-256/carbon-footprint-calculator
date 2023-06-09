@@ -71,7 +71,8 @@
   border-bottom: 4px solid #008b8b;
 }
 .form-section-header h2 {
-  margin: 1rem;
+  margin-left: 1.5rem;
+  margin-bottom: 0;
   display: inline-block;
 }
 .form-section-header img {
@@ -79,3 +80,6 @@
   max-width: 100px;
   display: inline-block;
 }
+
+
+

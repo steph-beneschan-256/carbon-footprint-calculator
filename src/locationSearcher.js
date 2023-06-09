@@ -16,9 +16,6 @@ export default function LocationSearcher({onResultSelected}) {
     const [errorMsg, setErrorMsg] = useState("");
     const [showResults, setShowResults] = useState(false);
 
-
-
-
     async function searchLocation(searchText) {
         // Clear the error message
         setErrorMsg("");
@@ -60,7 +57,6 @@ export default function LocationSearcher({onResultSelected}) {
                     {
                         searchResults.map((data) => (
                             <button onClick={() => {
-                                console.log("search result clicked")
                                 setShowResults(false);
                                 onResultSelected(data);
                             }}

@@ -1,17 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import LocationSearcher from './locationSearcher';
 import { useRef, useState } from 'react';
-import RouteWidget from './RouteWidget';
 import TravelForm from './TravelForm';
 import formDataManager from './FormDataManager';
 import FoodForm from './FoodForm';
 
 import Chart from "react-apexcharts";
 import WasteForm from './WasteForm';
-
-const CO2_PER_MILE = 400; //g
-//https://www.epa.gov/greenvehicles/tailpipe-greenhouse-gas-emissions-typical-passenger-vehicle#driving
+import HomeEnergyForm from './HomeEnergyForm';
 
 function App() {
 
@@ -32,7 +28,7 @@ function App() {
 
     const categories = Object.keys(footprintData.breakdown);
     setChartLabels(categories);
-    setChartSeries(categories.map((category) => footprintData.breakdown[category].footprint));
+    setChartSeries(categories.map((category) => footprintData.breakdown[category].footprint.toFixed(2) + " g CO₂e"));
 
     /*
     Find the 3 categories for in which the user has the highest carbon footprint. Then, for each of those categories, display a suggested course of action.
@@ -66,6 +62,7 @@ function App() {
             <TravelForm />
             <FoodForm />
             <WasteForm />
+            <HomeEnergyForm />
 
             <button onClick={calculateFootPrint} className="primary-button">
               Calculate total footprint
@@ -75,9 +72,9 @@ function App() {
         ) : (
           <>
             <h2>Your total carbon footprint:</h2>
-            <h1>{totalFootprintData.current.total} grams CO₂e per day</h1>
+            <h1>{totalFootprintData.current.total.toFixed(2)} grams CO₂e per day</h1>
             <p>
-            CO₂e is short for CO₂e equivalent. Your footprint is equivalent to emitting about {totalFootprintData.current.total} grams of CO₂.
+            CO₂e is short for CO₂e equivalent. Your footprint is equivalent to emitting about {totalFootprintData.current.total.toFixed(2)} grams of CO₂.
             {/* 
               This is correct, right?
               I referenced this:
