@@ -29,10 +29,10 @@ function getWasteFootprintData(wasteForm) {
     if(mostSignificantMaterial) {
         suggestions.push({
             header: `Recycle your ${materialsSorted[0]}`,
-            text: `Find out how to recycle ${materialsSorted[0]} in your community. If you recycle it regularly, you will likely reduce your footprint by ${EMISSIONS_SAVED_PER_MATERIAL[materialsSorted[0]]} kg per year.`,
+            text: `Find out how to recycle ${materialsSorted[0]} in your community. If you recycle it regularly, you will likely reduce your footprint by ${EMISSIONS_SAVED_PER_MATERIAL[materialsSorted[0]].toLocaleString("en-US")} kg per year.`,
             emissionsSaved: EMISSIONS_SAVED_PER_MATERIAL[materialsSorted[0]]
         })
-    }
+    };
 
     return {
         key: "Material waste",

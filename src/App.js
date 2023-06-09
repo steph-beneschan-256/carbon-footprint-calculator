@@ -93,7 +93,13 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Carbon Footprint Calculator</h1>
+        <div>
+          <img src="factory horizontal.png" alt=""></img>
+          <h1>
+            Carbon Footprint Calculator
+          </h1>
+        </div>
+        
         
       </header>
 
@@ -140,7 +146,7 @@ function App() {
         ) : (
           <>
             <h2>Your total carbon footprint:</h2>
-            <h1>{totalFootprintData.current.total.toFixed(2)} kg CO₂e per year</h1>
+            <h1>{totalFootprintData.current.total.toLocaleString("en-US")} kg CO₂e per year</h1>
             <h2>What does this number look like?</h2>
             <p>
               Your footprint is roughly equivalent to the greenhouse gases emitted from:
@@ -148,16 +154,16 @@ function App() {
             <ul>
               <li>
                 Burning
-                <b>{' '+(1.1 * totalFootprintData.current.total).toFixed(2)+' '}</b>
+                <b>{' '+(1.1 * totalFootprintData.current.total).toLocaleString("en-US")+' '}</b>
                 pounds of coal</li>
               <li>
                 Consuming
-                <b>{' '+(0.113 * totalFootprintData.current.total).toFixed(2)+' '}</b>
+                <b>{' '+(0.113 * totalFootprintData.current.total).toLocaleString("en-US")+' '}</b>
                 gallons of gasoline
               </li>
               <li>
                 The electricity used by
-                <b>{' '+(0.0002 * totalFootprintData.current.total).toFixed(2)+' '}</b>
+                <b>{' '+(0.0002 * totalFootprintData.current.total).toLocaleString("en-US")+' '}</b>
                 homes over one year
               </li>
             </ul>
@@ -168,11 +174,18 @@ function App() {
             <div className="footprint-chart-container">
               <Chart
                 type="donut"
-                options={{"labels": chartLabels}}
+                options={{
+                  "labels": chartLabels,
+                  tooltip: {
+                    y: {
+                      formatter: (v,i) => parseFloat(v).toLocaleString("en-US") + " kg CO₂e"
+                    }
+                  }
+                }}
                 series={chartSeries}
               />
             </div>
-            <h3>3 Suggestions to reduce your carbon footprint:</h3>
+            <h3>Suggestions to reduce your carbon footprint:</h3>
             <div className="suggestions-container">
             {
               suggestions.map((suggestion, index) => (

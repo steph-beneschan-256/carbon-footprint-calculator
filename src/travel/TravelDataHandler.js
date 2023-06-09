@@ -31,8 +31,8 @@ Using energy.gov data for consistency
 // in lbs
 const CO2_PER_MILE = {
     gas: 23.7 / 21.79,
-    electric: 168.9010109 / 3.60,
-    plugInHybrid: 56.3 / 100 / 3.03 * 168.9010109 + 43.7 / 100 / 40.80 * 23.7,
+    electric: 0.3724 / 3.60,
+    plugInHybrid: 56.3 / 100 / 3.03 * 0.3724 + 43.7 / 100 / 40.80 * 23.7,
     hybrid: 23.7 / 39.78
 
 };
@@ -43,7 +43,7 @@ function getSuggestions(footprint, carType) {
             return [
                 {
                     header: "Switch to a hybrid or electric vehicle",
-                    text: `Contrary to popular belief, electric and hybrid vehicles tend to be less expensive than gas-powered vehicles throughout their lifetime, due to differences in fuel and maintenance costs.\nFurthermore, using a more fuel-efficient vehicle can dramatically reduce your footprint. By switching to a plug-in hybrid vehicle, you will reduce your emissions by roughly ${(CO2_PER_MILE.plugInHybrid / CO2_PER_MILE.gas) * footprint} kg per year.`,
+                    text: `Contrary to popular belief, electric and hybrid vehicles tend to be less expensive than gas-powered vehicles throughout their lifetime, due to differences in fuel and maintenance costs.\nFurthermore, using a more fuel-efficient vehicle can dramatically reduce your footprint. By switching to a plug-in hybrid vehicle, you will reduce your emissions by roughly ${((CO2_PER_MILE.plugInHybrid / CO2_PER_MILE.gas) * footprint).toLocaleString("en-US")} kg per year.`,
                     emissionsSaved: (CO2_PER_MILE.plugInHybrid / CO2_PER_MILE.gas) * footprint
                 }
             ]
@@ -51,7 +51,7 @@ function getSuggestions(footprint, carType) {
             return [
                 {
                     header: "Switch to a plug-in hybrid or electric vehicle",
-                    text: `Generally, a plug-in hybrid vehicle will use electricity instead of gas whenever the battery has power, whereas a "full hybrid" vehicle always uses gas when traveling at higher speeds. By switching to a plug-in hybrid, you will reduce your emissions by roughly ${CO2_PER_MILE.plugInHybrid / CO2_PER_MILE.hybrid * footprint} kg per year.`,
+                    text: `Generally, a plug-in hybrid vehicle will use electricity instead of gas whenever the battery has power, whereas a "full hybrid" vehicle always uses gas when traveling at higher speeds. By switching to a plug-in hybrid, you will reduce your emissions by roughly ${(CO2_PER_MILE.plugInHybrid / CO2_PER_MILE.hybrid * footprint).toLocaleString("en-US")} kg per year.`,
                     emissionsSaved: CO2_PER_MILE.plugInHybrid / CO2_PER_MILE.hybrid * footprint
                 }
             ]
@@ -59,7 +59,7 @@ function getSuggestions(footprint, carType) {
             return [
                 {
                     header: "Consider walking or biking once per week",
-                    text: `While driving an electric or plug-in hybrid car is much more efficient for the environment than a gas-powered car, these cars still carry a footprint since the electricity needed to charge them usually comes (in part) from fossil fuels. If possible, switch to walking or biking in order to eliminate this footprint altogether. If you choose to walk or bike for 1/7 miles you currently drive, you will reduce your emissions by ${footprint/7} kg per year.`,
+                    text: `While driving an electric or plug-in hybrid car is much more efficient for the environment than a gas-powered car, these cars still carry a footprint since the electricity needed to charge them usually comes (in part) from fossil fuels. If possible, switch to walking or biking in order to eliminate this footprint altogether. If you choose to walk or bike for 1/7 miles you currently drive, you will reduce your emissions by ${(footprint/7).toLocaleString("en-US")} kg per year.`,
                     emissionsSaved: footprint/7
                 }
             ]

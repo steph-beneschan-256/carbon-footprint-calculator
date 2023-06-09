@@ -1,24 +1,24 @@
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+header div {
+  width: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  text-align: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
+
+header img {
+  margin: 1%;
+  max-height: 150px;
+  aspect-ratio: 2;
+  display: inline-block;
+}
+
+header h1 {
+  text-align: center;
+  display: inline-block;
+}
+
 
 .App-body {
   padding: 10px;

@@ -66,7 +66,7 @@ function FoodForm({formRef, savedData}) {
           <h3>Uneaten Food</h3>
           <p>Uneaten food, whether composted or sent to landfills, emits methane into the atmosphere. Of the food you buy, roughly how much do you end up throwing away (e.g. because it has expired)?</p>
           <label>
-          <span>Uneaten food:</span>
+          <span>Uneaten food (0% - 100%):</span>
             <input type="range" name="uneatenFoodPortion"
             min={0} max={1} step={0.1}
             defaultValue={getDefault("uneatenFoodPortion", 0.2)}/> 

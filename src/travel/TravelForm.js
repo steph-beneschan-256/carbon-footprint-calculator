@@ -112,7 +112,7 @@ function TravelForm({formRef, distanceRef, savedData, openDistanceUtility}) {
             <label>
               Miles driven per day:
               <input type="number" name="milesPerDay" ref={distanceRef}
-              min={0} defaultValue={getDefault("milesPerDay", 0)}/>
+              min={0} defaultValue={getDefault("milesPerDay", 30)}/>
             </label>
             <br />
 
@@ -130,7 +130,7 @@ function TravelForm({formRef, distanceRef, savedData, openDistanceUtility}) {
               Full Electric
             </label>
             <label>
-              <input type="radio" name="carType" value="plugin"
+              <input type="radio" name="carType" value="plugInHybrid"
               defaultChecked = {getDefault("carType") === "plugin"}/>
               Plug-In Hybrid
             </label>
