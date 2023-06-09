@@ -5,6 +5,7 @@ header div {
   align-items: center;
   text-align: center;
   justify-content: center;
+  border-bottom: 1px solid #00000088;
 }
 
 header img {
@@ -21,6 +22,10 @@ header h1 {
 
 
 .App-body {
+  padding: 10px;
+}
+
+.App-footer {
   padding: 10px;
 }
 
@@ -45,6 +50,8 @@ button {
 }
 
 .primary-button {
+  margin-top: 2rem;
+  height: 2.5rem;
   background-color: #07b1b1;
   color: white;
   border: none;
@@ -84,7 +91,8 @@ button {
 
 .full-width-button {
   width: 99%;
-  margin: 0.5%;
+  margin-left: 0.5%;
+  margin-right: 0.5%;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   font-size: 1rem;

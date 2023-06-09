@@ -21,7 +21,7 @@ function getFoodFootprintData(foodForm) {
     // Assume average of 650 kg (650000 g) of CO2e per person emitted each year due to food production
     // https://www.ers.usda.gov/webdocs/publications/43833/43680_eib121.pdf?v=0 
     const portionWasted = foodForm.get("uneatenFoodPortion");
-    const wasteFootprint = 650 * portionWasted;
+    const wasteFootprint = 650 * portionWasted / 0.2;
 
     let suggestions = [];
     suggestions.push({

@@ -6,7 +6,7 @@ import formDataManager from './FormDataManager';
 import FoodForm from './food/FoodForm';
 
 import Chart from "react-apexcharts";
-import WasteForm from './WasteForm';
+import WasteForm from './waste/WasteForm';
 import HomeEnergyForm from './HomeEnergyForm';
 import getFoodFootprintData from './food/FoodDataHandler';
 import getTravelFootprintData from './travel/TravelDataHandler';
@@ -57,9 +57,9 @@ function App() {
 
     const footprintData = {
       breakdown: {
-        food: getFoodFootprintData(foodData),
-        travel: getTravelFootprintData(travelData),
-        waste: getWasteFootprintData(wasteData)
+        "Food": getFoodFootprintData(foodData),
+        "Travel": getTravelFootprintData(travelData),
+        "Material Waste": getWasteFootprintData(wasteData)
       }
     };
     footprintData.total = Object.keys(footprintData.breakdown).reduce(
@@ -199,15 +199,92 @@ function App() {
 
             <button onClick={e => setShowResults(false)}
             className="tertiary-button full-width-button">
-              Back to form
+              Edit your answers
             </button>
           </>
         )}
 
         <div>
 
-        </div>
+        </div> 
         
+      </div>
+      <div className="App-footer">
+          <h2>Assumptions and References</h2>
+          <ul>
+            <li>
+              <p>
+              For each vehicle type covered by the survey (gas-powered, electric, full hybrid, and plug-in hybrid), the amount of CO2 emitted by driving the vehicle one mile is derived from the formulas used for the U.S. Department of Energy's Electricity Sources and Fuel-Cycle Emissions Tool. For the formulas which require the average emissions of generated electricity, this program uses the 2020 national average as given by the U.S. Energy Information Administration (see Table 6):
+              </p>
+              <ul>
+                <li>
+                  <a href="https://afdc.energy.gov/vehicles/electric_emissions_sources.html" target="_blank" rel="noreferrer">
+                    https://afdc.energy.gov/vehicles/electric_emissions_sources.html
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.eia.gov/environment/emissions/state/" target="_blank" rel="noreferrer">
+                    https://www.eia.gov/environment/emissions/state/
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p>
+              Each year, the average American consumer discards about 20% of food waste according to the U.S. Department of Agriculture, and causes about 650kg of CO2e of emissions due to food waste according to the U.S. Environmental Protection Agency. The user's footprint due to food waste is therefore estimated at (x - 20%) * 650kg CO2e per year, where x is the percentage of food wasted by the user:
+              </p>
+              <ul>
+                <li>
+                <a href="https://www.ers.usda.gov/webdocs/publications/43833/43680_eib121.pdf?v=0" target="_blank" rel="noreferrer">
+                  https://www.ers.usda.gov/webdocs/publications/43833/43680_eib121.pdf?v=0 
+                </a>
+                </li>
+                <li>
+                <a href="https://www.epa.gov/system/files/documents/2021-11/from-farm-to-kitchen-the-environmental-impacts-of-u.s.-food-waste_508-tagged.pdf" target="_blank" rel="noreferrer">
+                  https://www.epa.gov/system/files/documents/2021-11/from-farm-to-kitchen-the-environmental-impacts-of-u.s.-food-waste_508-tagged.pdf 
+                </a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p>
+              If the user eats beef, other meat, eggs, and/or cheese on a given day, the user is assumed to eat exactly 100g of each. If the user drinks milk on a given day, the user is assumed to drink 1 cup. The CO2 emissions caused by producing one serving for each of these food categories is derived from the following source: 
+              </p>
+              <ul>
+                <li>
+                <a href="https://www.researchgate.net/publication/325532198_Reducing_food%27s_environmental_impacts_through_producers_and_consumers" target="_blank" rel="noreferrer">
+                  https://www.researchgate.net/publication/325532198_Reducing_food%27s_environmental_impacts_through_producers_and_consumers 
+                </a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p>
+              For each type of recyclable material covered by the survey, the estimated emissions saved per year if the user recycles that material comes from the data used by the Environmental Protection Agency's own Carbon Footprint Calculator, last updated in 2014:
+              </p>
+              <ul>
+                <li>
+                <a href="https://www3.epa.gov/carbon-footprint-calculator/" target="_blank" rel="noreferrer">
+                https://www3.epa.gov/carbon-footprint-calculator/
+                </a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p>
+              1 kg of CO2-e is assumed equal to the emissions produced by burning x lbs of coal, consuming y gallons of gasoline, or the energy used by z homes over a given year. This data comes from the Environmental Protection Agency's Greenhouse Gas Equivalencies Calculator:
+              </p>
+              <ul>
+                <li>
+                <a href="https://www.epa.gov/energy/greenhouse-gas-equivalencies-calculator" target="_blank" rel="noreferrer">
+                  https://www.epa.gov/energy/greenhouse-gas-equivalencies-calculator
+                </a>
+                
+                </li>
+              </ul>
+            </li>
+          </ul>
+
       </div>
     </div>
   );

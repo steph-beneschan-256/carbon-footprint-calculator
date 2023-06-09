@@ -1,15 +1,4 @@
 
-/*
-Get the user's total footprint for this type of activity,
-and suggestions for reducing their footprint
-*/
-
-/*
-Register the getFootprintData function for this activity type/section form
-This should make it easier for our application to accumulate all the data at once
-*/
-
-
 function FoodForm({formRef, savedData}) {
 
     function getDefault(key, trueDefault) {
@@ -69,7 +58,7 @@ function FoodForm({formRef, savedData}) {
           <span>Uneaten food (0% - 100%):</span>
             <input type="range" name="uneatenFoodPortion"
             min={0} max={1} step={0.1}
-            defaultValue={getDefault("uneatenFoodPortion", 0.2)}/> 
+            defaultValue={getDefault("uneatenFoodPortion", 0)}/> 
           </label>
         </div>
       </form>

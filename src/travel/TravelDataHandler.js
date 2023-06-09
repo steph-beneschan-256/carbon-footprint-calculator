@@ -26,12 +26,17 @@ Assuming 1 BTU = 293.07107 kWh
 
 Using energy.gov data for consistency
 
+1 million btu = 293.07107 kWh
+49.454 kg carbon dioxide per 1 million btu i.e. per 293.07107 kWh
+0.169 kg (=0.3726 lbs) per kWh 
+1 / 3.60 kWh used per mile for a fully-electric car
+
 */
 
 // in lbs
 const CO2_PER_MILE = {
     gas: 23.7 / 21.79,
-    electric: 0.3724 / 3.60,
+    electric: 0.3726 / 3.60,
     plugInHybrid: 56.3 / 100 / 3.03 * 0.3724 + 43.7 / 100 / 40.80 * 23.7,
     hybrid: 23.7 / 39.78
 

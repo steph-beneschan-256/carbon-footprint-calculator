@@ -112,7 +112,7 @@ function TravelForm({formRef, distanceRef, savedData, openDistanceUtility}) {
             <label>
               Miles driven per day:
               <input type="number" name="milesPerDay" ref={distanceRef}
-              min={0} defaultValue={getDefault("milesPerDay", 30)}/>
+              min={0} defaultValue={getDefault("milesPerDay", 0)}/>
             </label>
             <br />
 
@@ -197,10 +197,10 @@ function TravelForm({formRef, distanceRef, savedData, openDistanceUtility}) {
             
       </div>
     </form>
-    <p>
+    {/* <p>
       If you're not sure how many miles you drive each day, please use the Distance Finder:
     </p>
-    <button onClick={openDistanceUtility}>Distance Finder</button>
+    <button onClick={openDistanceUtility}>Distance Finder</button> */}
     </div>
   );
 }

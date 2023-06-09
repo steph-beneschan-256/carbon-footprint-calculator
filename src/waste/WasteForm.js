@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import formDataManager from "./FormDataManager";
+import formDataManager from "../FormDataManager";
 
 /*
 notes:
