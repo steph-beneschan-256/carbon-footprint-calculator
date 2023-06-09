@@ -7,7 +7,8 @@ import "./locationSearcher.css";
 const lambdaEndpoint = "https://hyt56t2jwvui25al52gvssz2aa0juxrr.lambda-url.us-east-2.on.aws/";
 
 const sampleData = require("./sampleData.json");
-const useSampleData = true;
+let useSampleData = false; //true;
+useSampleData = true;
 
 export default function LocationSearcher({onResultSelected}) {
     const [inputText, setInputText] = useState("");

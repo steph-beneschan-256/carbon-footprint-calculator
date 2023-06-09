@@ -37,12 +37,14 @@
   }
 }
 
-.primary-button {
-  width: 98%;
-  margin: 1%;
-  padding-top: 1%;
-  padding-bottom: 1%;
+button {
+  margin: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-size: 1rem;
+}
+
+.primary-button {
   background-color: #07b1b1;
   color: white;
   border: none;
@@ -53,6 +55,41 @@
   background-color: #37c0c0;
   cursor: pointer;
 }
+
+/*add secondary button?*/
+.secondary-button {
+  background-color: #008b8b;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  transition: background-color 0.25s;
+}
+.secondary-button:hover {
+  background-color: #059e9e;
+  cursor: pointer;
+}
+
+.tertiary-button {
+  background-color: transparent;
+  color: #008b8b;
+  border: 2px solid #008b8b;
+  border-radius: 0.5rem;
+  transition: color 0.25s border-color 0.25s;
+}
+.tertiary-button:hover {
+  color: #059e9e;
+  border-color: #059e9e;
+  cursor: pointer;
+}
+
+.full-width-button {
+  width: 99%;
+  margin: 0.5%;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
 
 .footprint-chart-container {
   width: calc(min(90vw, 90vh, 600px));
@@ -77,9 +114,20 @@
 }
 .form-section-header img {
   width: 10%;
-  max-width: 100px;
+  max-width: 80px;
   display: inline-block;
 }
 
 
+label {
+  display: block;
+  width: 95%;
+  margin-left: 5%;
+}
 
+label span {
+  display: inline-block;
+  width: 50%;
+  max-width: 200px;
+  text-align: left;
+}

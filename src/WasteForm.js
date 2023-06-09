@@ -18,7 +18,7 @@ https://www.epa.gov/energy/greenhouse-gas-equivalencies-calculator
 A unique string associated with this type of activity,
 used for synchronization with the FormDataManager object.
 */
-const ACTIVITY_TYPE_KEY = "WASTE";
+const ACTIVITY_TYPE_KEY = "Waste";
 
 /*
 data from epa calculator, last updated 9/1/2014
@@ -96,63 +96,51 @@ async function getFootprintData(userData) {
     }
 }
 
-/*
-Register the getFootprintData function for this activity type/section form
-This should make it easier for our application to accumulate all the data at once
-*/
-formDataManager.addActivityType(ACTIVITY_TYPE_KEY, getFootprintData);
+function WasteForm({formRef, savedData}) {
 
-function WasteForm() {
-
-    // Data that the user has input for this activity type
-    const [inputData, setInputData] = useState(null);
-
-    /*
-    When the component is created, load the user's saved data if available,
-    or intialize to a default value
-    */
-    useEffect(() => {
-        if(!inputData) {
-            let savedData = formDataManager.loadData(ACTIVITY_TYPE_KEY);
-            setInputData(savedData ? savedData :
-                Array(MATERIAL_WASTE_DATA.length).fill(false) 
-                //Default value; one boolean for each material type
-            );
-        }
-      }, [inputData]);
-    
+    const checkedBoxes = savedData ? new Set(savedData.getAll("waste")) : new Set();
 
     return(
-        <div className="form-section">
+        <form ref={formRef}>
             <div className="form-section-header">
                 <img src="waste.svg" alt="" />
                 <h2>Waste/Recycling</h2>
             </div>
             <div className="form-section-inner">
                 <p>
-                    Some types of waste can be recycled or composted, while other types of waste cannot be.
+                    Some types of waste can be recycled, while other types of waste cannot be.
                 </p>
                 <p>
-                    Which of the following materials do you regularly use, and regularly dispose of without recycling or composting them?
+                    Which of the following materials do you regularly use, and regularly dispose of without recycling them?
                 </p>
-                {inputData && MATERIAL_WASTE_DATA.map((data, index) => (
-                <div>
-                    {
-                        <label>   
-                            <input type="checkbox" checked={inputData[index]}
-                            onChange={e => {
-                                const newData = inputData.map((v,i) => (i !== index ? v : !inputData[index]));
-                                setInputData(newData);
-                                formDataManager.saveData(ACTIVITY_TYPE_KEY, newData);
-                            }}/>
-                            {data.name}
-                        </label>
-                    }
-                </div>
-                ))}
-            </div>
 
-        </div>
+                <label>
+                    <input type="checkbox" name="waste" value="metal"
+                    defaultChecked={checkedBoxes.has("metal")}/>
+                    Metal
+                </label>
+                <label>
+                    <input type="checkbox" name="waste" value="plastic"
+                    defaultChecked={checkedBoxes.has("plastic")}/>
+                    Plastic
+                </label>
+                <label>
+                    <input type="checkbox" name="waste" value="glass"
+                    defaultChecked={checkedBoxes.has("glass")}/>
+                    Glass
+                </label>
+                <label>
+                    <input type="checkbox" name="waste" value="newspaper"
+                    defaultChecked={checkedBoxes.has("newspaper")}/>
+                    Newspaper
+                </label>
+                <label>
+                    <input type="checkbox" name="waste" value="magazines"
+                    defaultChecked={checkedBoxes.has("magazines")}/>
+                    Magazines
+                </label>
+            </div>
+        </form>
     )
 
 }

@@ -26,7 +26,7 @@ const HEATING_TYPES = [
 A unique string associated with this type of activity,
 used for synchronization with the FormDataManager object.
 */
-const ACTIVITY_TYPE_KEY = "HOME ENERGY";
+const ACTIVITY_TYPE_KEY = "Home Energy";
 
 /*
 Get the user's total footprint for this type of activity,
@@ -91,7 +91,7 @@ function HomeEnergyForm() {
   return (
     <div className="form-section">
       <div className="form-section-header">
-        <img src="car.svg" alt="" />
+        <img src="home.svg" alt="" />
         <h2>Home Energy</h2>
       </div>
       <div className="form-section-inner">

@@ -1,13 +1,19 @@
 import logo from './logo.svg';
 import './App.css';
 import { useRef, useState } from 'react';
-import TravelForm from './TravelForm';
+import TravelForm from './travel/TravelForm';
 import formDataManager from './FormDataManager';
-import FoodForm from './FoodForm';
+import FoodForm from './food/FoodForm';
 
 import Chart from "react-apexcharts";
 import WasteForm from './WasteForm';
 import HomeEnergyForm from './HomeEnergyForm';
+import getFoodFootprintData from './food/FoodDataHandler';
+import getTravelFootprintData from './travel/TravelDataHandler';
+import DistanceFinder from './DistanceFinder';
+import getWasteFootprintData from './waste/WasteDataHandler';
+
+
 
 function App() {
 
@@ -21,33 +27,73 @@ function App() {
   const [chartLabels, setChartLabels] = useState([]);
   const [chartSeries, setChartSeries] = useState([]);
 
-  async function calculateFootPrint() {
+  // References to the form objects
+  const foodFormRef = useRef(null);
+  const travelFormRef = useRef(null);
+  const wasteFormRef = useRef(null);
+  const homeEnergyFormRef = useRef(null);
 
-    const footprintData = await formDataManager.calculateTotalFootprint();
+  // Saved data
+  const foodSavedData = useRef(null);
+  const travelSavedData = useRef(null);
+  const wasteSavedData = useRef(null);
+  const homeEnergySavedData = useRef(null);
+
+  // For Distance Helper utility
+  const distanceFieldRef = useRef(null);
+  const [showDistanceHelper, setShowDistanceHelper] = useState(false);
+
+  async function calculateFootPrint() {
+    const travelData = new FormData(travelFormRef.current);
+    const foodData = new FormData(foodFormRef.current);
+    const wasteData = new FormData(wasteFormRef.current);
+
+    travelSavedData.current = travelData;
+    foodSavedData.current = foodData;
+    wasteSavedData.current = wasteData;
+    //homeEnergyData.current = new FormData(homeEnergyFormRef.current);
+
+    console.log(wasteSavedData.current);
+
+    const footprintData = {
+      breakdown: {
+        food: getFoodFootprintData(foodData),
+        travel: getTravelFootprintData(travelData),
+        waste: getWasteFootprintData(wasteData)
+      }
+    };
+    footprintData.total = Object.keys(footprintData.breakdown).reduce(
+      (sum, key) => sum + footprintData.breakdown[key].footprint, 0
+    );
+
+    //const footprintData = await formDataManager.calculateTotalFootprint();
     totalFootprintData.current = footprintData;
 
     const categories = Object.keys(footprintData.breakdown);
     setChartLabels(categories);
-    setChartSeries(categories.map((category) => footprintData.breakdown[category].footprint.toFixed(2) + " g CO₂e"));
+    setChartSeries(categories.map((category) => footprintData.breakdown[category].footprint));
 
-    /*
-    Find the 3 categories for in which the user has the highest carbon footprint. Then, for each of those categories, display a suggested course of action.
-    */
-    categories.sort((c1, c2) => 
-      footprintData.breakdown[c2] - footprintData.breakdown[c1]
-    );
+
     let newSuggestions = [];
-    categories.slice(0,3).forEach((category) => {
+    categories.forEach((category) => {
         newSuggestions = newSuggestions.concat(footprintData.breakdown[category].suggestions);
     });
-    setSuggestions(newSuggestions);
+
+    // Sort suggestions in descending order of emissionsSaved
+    newSuggestions.sort((s1, s2) =>
+      s2.emissionsSaved - s1.emissionsSaved
+    );
+    setSuggestions(newSuggestions.slice(0,3));
 
     setShowResults(true);
   }
 
+  //equivalencies from here: https://www.epa.gov/energy/greenhouse-gas-equivalencies-calculator#results
+
   return (
     <div className="App">
       <header className="App-header">
+        <h1>Carbon Footprint Calculator</h1>
         
       </header>
 
@@ -59,12 +105,34 @@ function App() {
           {/* The form */}
             {/* Travel section */}
 
-            <TravelForm />
-            <FoodForm />
-            <WasteForm />
-            <HomeEnergyForm />
+            <div style={{display: showResults ? "none" : "initial"}}>
+              <TravelForm formRef={travelFormRef} savedData={travelSavedData.current}
+              distanceRef={distanceFieldRef}
+              openDistanceUtility={() => {
+                setShowDistanceHelper(true);
+              }}/>
+              <FoodForm formRef={foodFormRef} savedData={foodSavedData.current}/>
+              <WasteForm formRef={wasteFormRef} savedData={wasteSavedData.current} />
+              {/* <HomeEnergyForm formRef={homeEnergyFormRef} savedData={homeEnergySavedData.current}/> */}
+            </div>
 
-            <button onClick={calculateFootPrint} className="primary-button">
+            
+
+            {showDistanceHelper && <DistanceFinder 
+              onSave={(routes) => {
+                let totalDistance = routes.reduce(
+                  (sum, route) => sum + route.distance ? (route.distance * route.daysPerWeek) : 0,
+                  0
+                );
+                distanceFieldRef.current.value = (totalDistance.toFixed(1));
+                console.log(distanceFieldRef.current);
+                setShowDistanceHelper(false);
+
+              }}
+              onCancel={() => setShowDistanceHelper(false)}
+            />}
+
+            <button onClick={calculateFootPrint} className="primary-button full-width-button">
               Calculate total footprint
             </button>
 
@@ -72,15 +140,28 @@ function App() {
         ) : (
           <>
             <h2>Your total carbon footprint:</h2>
-            <h1>{totalFootprintData.current.total.toFixed(2)} grams CO₂e per day</h1>
+            <h1>{totalFootprintData.current.total.toFixed(2)} kg CO₂e per year</h1>
+            <h2>What does this number look like?</h2>
             <p>
-            CO₂e is short for CO₂e equivalent. Your footprint is equivalent to emitting about {totalFootprintData.current.total.toFixed(2)} grams of CO₂.
-            {/* 
-              This is correct, right?
-              I referenced this:
-              https://www.myclimate.org/information/faq/faq-detail/what-are-co2-equivalents/
-            */}
+              Your footprint is roughly equivalent to the greenhouse gases emitted from:
             </p>
+            <ul>
+              <li>
+                Burning
+                <b>{' '+(1.1 * totalFootprintData.current.total).toFixed(2)+' '}</b>
+                pounds of coal</li>
+              <li>
+                Consuming
+                <b>{' '+(0.113 * totalFootprintData.current.total).toFixed(2)+' '}</b>
+                gallons of gasoline
+              </li>
+              <li>
+                The electricity used by
+                <b>{' '+(0.0002 * totalFootprintData.current.total).toFixed(2)+' '}</b>
+                homes over one year
+              </li>
+            </ul>
+
             <h3>
               Breakdown:
             </h3>
@@ -91,18 +172,20 @@ function App() {
                 series={chartSeries}
               />
             </div>
-            <h3>Suggestions to reduce your carbon footprint:</h3>
+            <h3>3 Suggestions to reduce your carbon footprint:</h3>
             <div className="suggestions-container">
             {
               suggestions.map((suggestion, index) => (
                 <p>
-                  {index+1}. {suggestion}
+                  <h4>{index+1}. {suggestion.header}</h4>
+                  <p>{suggestion.text}</p>
                 </p>
               ))
             }
             </div>
 
-            <button onClick={e => setShowResults(false)}>
+            <button onClick={e => setShowResults(false)}
+            className="tertiary-button full-width-button">
               Back to form
             </button>
           </>
